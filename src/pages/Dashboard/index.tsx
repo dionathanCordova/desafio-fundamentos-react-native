@@ -35,11 +35,18 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadProducts(): Promise<void> {
-      // TODO
+      // PRA FUNCIONAR PRECISA RODAR OS SEGUINTES COMANDOS:
+      // yarn json-server server.json -p 3333
+      // adb reverse tcp:3333 tcp:3333
+      const [ item ] = await Promise.all([
+        api.get('/products')
+      ])
+
+      setProducts(item.data);
     }
 
     loadProducts();
-  }, []);
+  }, [products]);
 
   function handleAddToCart(item: Product): void {
     // TODO
