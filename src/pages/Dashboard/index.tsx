@@ -38,19 +38,15 @@ const Dashboard: React.FC = () => {
       // PRA FUNCIONAR PRECISA RODAR OS SEGUINTES COMANDOS:
       // yarn json-server server.json -p 3333
       // adb reverse tcp:3333 tcp:3333
-      const [ item ] = await Promise.all([
-        api.get('/products')
-      ])
-
-      setProducts(item.data);
+      const response = await api.get('/products');
+      setProducts(response.data);
     }
 
     loadProducts();
-  }, [products]);
+  }, []);
 
   function handleAddToCart(item: Product): void {
-    const items = { ... item, quantity: 1};
-    addToCart(items);
+    addToCart(item);
   }
 
   return (
